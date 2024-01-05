@@ -11,7 +11,6 @@ from MissionTitleUpdater import MissionTitleUpdater
 from datetime import datetime
 import streamlit.components.v1 as components
 from bs4 import SoupStrainer
-import concurrent.futures
 
 import warnings
 warnings.filterwarnings('ignore', message='missing ScriptRunContext')
@@ -314,31 +313,13 @@ class UtilityFunctions:
     @staticmethod
     def display_cards(players_df, player_count_selection):
         all_cards_html = "<div style='display: flex; flex-wrap: wrap; justify-content: center;'>"
-        
-        def fetch_data_concurrently(url, fetch_function):
-            return url, fetch_function(url)
 
-        def pre_fetch_data(urls, fetch_function):
-            with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-                future_to_url = {executor.submit(fetch_data_concurrently, url, fetch_function): url for url in urls}
+        # Fetch descriptions and background URLs for unique ProfileURLs
+        unique_urls = players_df['ProfileURL'].unique()
+        description_cache = {url: DataFetcher.fetch_description(url) for url in unique_urls}
+        background_cache = {url: DataFetcher.fetch_background_url(url) for url in unique_urls}
 
-                results = {}
-                for future in concurrent.futures.as_completed(future_to_url):
-                    url = future_to_url[future]
-                    try:
-                        result = future.result()
-                        results[result[0]] = result[1]
-                    except Exception as e:
-                        # Handle or log the exception
-                        print(f"Error fetching data for URL {url}: {e}")
-
-            return results
-
-        # Fetch descriptions and background URLs concurrently
-        description_cache = pre_fetch_data(players_df['ProfileURL'].unique(), DataFetcher.fetch_description)
-        background_cache = pre_fetch_data(players_df['ProfileURL'].unique(), DataFetcher.fetch_background_url)
-
-        # Map the URLs to their cached values
+        # Modify the players_df DataFrame using vectorized operations
         players_df['Description'] = players_df['ProfileURL'].map(description_cache)
         players_df['BackgroundURL'] = players_df['ProfileURL'].map(background_cache)
 
