@@ -1,0 +1,11 @@
+gensim==4.3.0
+nltk==3.8.1
+sklearn==0.0.post10
+numpy==1.24.3
+aiohttp==3.9.1
+tenacity==8.2.3
+pandas==2.0.3
+tqdm==4.66.1
+streamlit==1.29.0
+requests==2.31.0
+beautifulsoup4==4.12.2
