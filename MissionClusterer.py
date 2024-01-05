@@ -4,7 +4,15 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 import numpy as np
 import random
-
+import nltk
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    # 'punkt' not found, download it
+    nltk.download('punkt')
+    print("Downloading 'punkt' dataset...")
+else:
+    pass
 class MissionClusterer:
     """
     A class for clustering mission names based on Word2Vec embeddings and KMeans clustering.
