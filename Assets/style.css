@@ -1,0 +1,151 @@
+body, #root, .main, .block-container {
+    background: linear-gradient(to bottom, #482b29 0%, #3e1e28 30%, #2c202b 60%, #1e222f 100%) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    color: #fff !important;
+    font-family: 'TF2Professor';
+}
+
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: linear-gradient(to bottom, #3e1e28 0%, #2c202b 20%, #1e222f 100%) !important;
+}
+
+.flip-card {
+    perspective: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.19);
+    border: 4px solid #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px; /* Adjust margin as necessary */
+    flex: 0 1 calc(20% - 20px); /* Adjust flex-basis to account for margin and border */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Inner shadow for embossed effect */
+    background-color: transparent; /* Make background transparent */
+    backdrop-filter: blur(5px); /* Apply a blur effect to the content behind the card */
+    -webkit-backdrop-filter: blur(5px); /* For Safari */
+}
+
+.flip-card-front {
+    color: #333;
+    font-family: 'Courier New', Courier, monospace; /* Classic typewriter font */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back {
+    color: white;
+    transform: rotateY(180deg);
+    overflow-y: auto;
+    font-size: 10px; /* Responsively smaller font for back side */
+    font-family: 'Courier New', Courier, monospace; /* Consistent font with the front */
+}
+
+.flip-card img {
+    width: 100%; /* Slightly larger image */
+    height: 100%; /* Maintain aspect ratio */
+}
+
+.card-container.flipped .flip-card-inner {
+    transform: rotateY(180deg); /* Flip the inner card when container is flipped */
+}
+
+.card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-container {
+    /* ... */
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card-container.flipped .card-front {
+    transform: rotateY(180deg);
+}
+
+.card-container.flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+/* Add some animations for flipping */
+.card-container:not(.flipped) .flip-card-inner {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.card-container.flipped .flip-card-inner {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.9);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+    .flip-card {
+      flex: 0 1 calc(25% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .flip-card {
+      flex: 0 1 calc(33.3333% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .flip-card {
+      flex: 0 1 calc(50% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .flip-card {
+      flex: 0 1 100%;
+    }
+  }
+
+/* Fallback for browsers not supporting backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
+    .flip-card-front, .flip-card-back {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+@font-face {
+    font-family: 'TF2Build';
+    src: url('/assets/tf2build.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'TF2Professor';
+    src: url('/assets/tf2professor.ttf') format('truetype');
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px #333; }
+    50% { box-shadow: 0 0 15px #333; }
+    100% { box-shadow: 0 0 5px #333; }
+  }
+
+.flip-card-front div.player-name {
+  animation: pulse 2s infinite;
+}
