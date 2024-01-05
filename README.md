@@ -1,4 +1,3 @@
-```markdown
 # Shroomer Shill Station 300k
 
 I created the Shroomer Shill Station 300k for [Mushroom hunting](https://www.youtube.com/@Mushroomhunting1337) as a practical (joke) solution for analyzing and displaying speedrun data for the Potato.tf MvM community, and generating wild descriptions for videos He archives. This is my first application built on the Streamlit framework, so it was fun to experiment with. 
@@ -15,5 +14,3 @@ I created the Shroomer Shill Station 300k for [Mushroom hunting](https://www.you
 - **Community Engagement**: Assists in generating prompts for video description, quite useful for a good laugh. 
 
 All the best, and happy hunting!
-
-```
