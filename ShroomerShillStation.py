@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup, NavigableString, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag, SoupStrainer
 import os
 from functools import lru_cache
 import asyncio
